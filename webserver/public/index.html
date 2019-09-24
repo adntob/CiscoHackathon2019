@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS xAPI Call Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="panel">
+    Call someone
+    <p/>
+    <input class="number" placeholder="mr.president@acme.com" />
+    <button class="call">Call</button>
+    <button class="end">End</button>
+  </div>
+</body>
+
+<script>
+  function $(selector) {
+    return document.querySelector(selector);
+  }
+
+  function call() {
+    const number = $('.number').value;
+    if (!number || !number.includes('@')) {
+      alert('Enter URL to dial');
+      return;
+    }
+    fetch('/call/' + number)
+      .catch(e => alert('Unable to call', number));
+  }
+
+  function endCall() {
+    fetch('/endCall');
+  }
+
+  function updateGui(isInCall) {
+    $('.call').style.display = isInCall ? 'none' : 'initial';
+    $('.end').style.display = !isInCall ? 'none' : 'initial';
+    $('.number').disabled = isInCall;
+  }
+
+  function checkInCall() {
+    const isInCall = fetch('/isInCall')
+      .then(result => result.text())
+      .then(text => updateGui(text === 'true'));
+  }
+
+  function init() {
+    $('.call').onclick = call;
+    $('.end').onclick = endCall;
+
+    // Polling is not nice, real solution would be to use web sockets:
+    setInterval(checkInCall, 2000);
+  }
+
+  window.onload = init;
+</script>
+</html>

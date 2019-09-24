@@ -1,17 +1,31 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const xapi = require('./xapi');
 
-function call(number) {
-  console.log('Call: ', number);
-}
+const codec = {
+  host: '10.47.112.232',
+  username: 'admin',
+  password: '',
+};
+
+xapi.connect(codec);
 
 app.get('/call', (req, res) => res.send('Specify who you want to call too'));
 app.get('/call/:number', (req, res) => {
   const { number } = req.params;
-  call(number);
+  xapi.dial(number);
   res.send('Call! ' + number);
 });
+app.get('/endCall', (req, res) => {
+  xapi.hangUp();
+  res.send(true);
+});
+app.get('/isInCall', (req, res) => {
+  res.send(xapi.canCall() ? false : true);
+});
 
+// serve html files, assets etc from this folder:
 app.use(express.static('public'));
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
