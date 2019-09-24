@@ -2,7 +2,7 @@
 
 Cisco Webex Devices supports a large and varied API set. All components are well documented by themselves, but it can be overwhelming for customers and developers to understand which API technology to choose, and why.
 
-This guide gives a brief overview of the most important components ("puzzle piece"), and some tips on when to choose one over the other. For each of the component, there is a runnable example as well.
+This guide gives a brief overview of the most important components ("puzzle pieces"), and some tips on when to choose one over the other. For each of the component, there is a runnable example as well.
 
 ## Mini dictionary
 
@@ -171,6 +171,8 @@ xConfiguration NetworkServices Mode: On
 
 ### jsxapi with Express web server
 
+<img src="images/webpage.png" style="margin-left: 25%; width: 50%;" />
+
 If you want people to be able to interact with the jsxapi above from other devices than eg the Cisco Touch 10, a simple way is to integrate the jsxapi with a web server. Strictly speaking, this has nothing to do with Webex APIs, but we have included an example here anyway to get you quickly started.
 
 Express is a minimal Node.js web server that's easy to set up. After installing it with npm, you can embed it with jsxapi like this:
@@ -197,4 +199,27 @@ app.use(express.static('public'));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 ```
 
-This hooks up a REST Api with the jsxapi, so a call can be started from eg a user's mobile phone. Check out the full example in the `webserver` folder of the Git repo.
+This hooks up a REST Api with the jsxapi, so a call can be started from eg a user's mobile phone.
+
+Check out the full example in the `webserver` folder of the Git repo. If you haven't already, type
+`npm install` in the repo's root directory to install dependencies. cd to the `webserver` folder,
+then type `node server.js` to start the server.
+
+Visiting `http://localhost:3000` in your browser should give you a page to dial.
+
+You can test the server itself by typing this in your browser's URL bar:
+
+`http://localhost:3000/call/fireplace@ivr.vc`
+
+It should place a call. The following request should hang up:
+
+`http://localhost:3000/endCall`
+
+
+## xAPI over web socket
+
+In the example above, the web page is talking to the video device via an Express web server. Since CE 9.8 (TODO verify) it is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server to handle the communication.
+
+Please note that this solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device.
+
+TODO link and example here
