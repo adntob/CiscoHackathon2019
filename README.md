@@ -269,9 +269,9 @@ To add the web app to your video device:
 * It should now appear on the home screen of your video device
 * Click the web app button to test it, click home to go back
 
-Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device.
+The favicon that the web page includes, is automatically used as icon on the home screen.
 
-Config:
+Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device. Config:
 `xConfig WebEngine RemoteDebugging: On`
 
 For full information on what the web engine supports, see the developer guide. TODO link
