@@ -4,6 +4,8 @@ Cisco Webex Devices supports a large and varied API set. All components are well
 
 This guide gives a brief overview of the most important components ("puzzle pieces"), and some tips on when to choose one over the other. For each of the component, there is a runnable example as well.
 
+TODO Refer to git repo here
+
 ## Mini dictionary
 
 * xAPI - the core protocol used to manipulate the video system, such as making calls, adjusting volume etc
@@ -79,6 +81,14 @@ The macros also support communicating with with the external world using HTTP GE
 Supported devices: All devices running CE 8 and higher, except SX10 and Webex Share (TODO VERIFY)
 
 
+Deployments: both on-prem and cloud
+
+Required configuration: `xConfiguration Macro Mode: On` (can be enabled in macro editor too)
+
+Documentation:
+* See TODO for full documentation
+* See the help section in macro editor for examples, and also a comprehensive tutorial
+
 <div>
   <img src="images/ui-extensions.png" style="margin-left: 5%; width: 30%;" />
   <img src="images/macro-editor.png" style="width: 30%;" />
@@ -107,6 +117,16 @@ xapi.event.on('UserInterface Extensions Panel Clicked', guiEvent);
 See the `macro-user-extensions` example in the Git repo for the UI Extensions file and the macro.
 
 Documentation: TODO link
+
+## User interface Extensions
+
+User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also make controls that makes it easier to access features of the video system that you frequently use.
+
+The custom interfaces can be created easily the the drag and drop extensions editor on the video device itself. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
+
+The custom user interface extensions contain basic UI elements such as buttons, toggles, sliders and tabs. If you need more advanced user interfaces, such as a map, consider using a web app instead.
+
+TODO link to inroom docs here
 
 ## jsxapi and Node.js
 
@@ -224,3 +244,36 @@ In the example above, the web page is talking to the video device via an Express
 Please note that this solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device.
 
 TODO link and example here
+
+
+## Web apps
+
+<img src="images/webapps.png" style="margin-left: 25%; width: 50%;" />
+
+
+The newer Webex devices with touch screens support web apps, which are basically web views with interactive content pointing to external URLs.
+
+Making web apps for the Cisco devices is basically like making any other web page, but you might want to optimise for the the use case of being on a shared device, as well as adjust sizes for big screen and tune performance.
+
+The web engine is powered by Chromium, so most of the stuff you expect from a full browser is available, such as HTML5 tags, EcmaScript 6 syntax, CSS3, local storage, canvas, SVG, web sockets etc. Note that only one "tab" is supported.
+
+Included is a web app for doing a simple white boarding. You can use this basis or inspiration for an alternative whiteboard with some features that you would like, such as a dedicated brain storming app, a whiteboard with shape support, automatic OCR etc.
+
+For full information on what the web engine supports, see the developer guide. TODO link
+
+## Design guidelines
+
+If you design your own apps to be used specifically for Webex devices, you might like to use the Cisco styles, such as fonts, icons and colors. These are freely available at momentum.design.
+
+<img src="images/design.png" style="margin-left: 25%; width: 50%;" />
+
+
+Remaining examples
+
+* web sockets: call, show events
+
+unsure
+* bot, integrations, webex api
+* cloud xapi
+* http putxml / postman stuff
+* http feedback

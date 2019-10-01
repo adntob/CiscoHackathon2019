@@ -32,7 +32,8 @@
   }
 
   function endCall() {
-    fetch('/endCall');
+    fetch('/endCall')
+      .catch(e => alert('Unable to end call'));
   }
 
   function updateGui(isInCall) {
@@ -51,6 +52,7 @@
     $('.call').onclick = call;
     $('.end').onclick = endCall;
 
+    // Check call status every 2 seconds
     // Polling is not nice, real solution would be to use web sockets:
     setInterval(checkInCall, 2000);
   }
