@@ -66,6 +66,7 @@ For a full reference guide, see:
 
 https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html
 
+TODO: add xevents
 
 ## Macros and user interface extensions
 
@@ -73,10 +74,10 @@ Macros are snippets of code (scripts) written in JavaScript that can run on the 
 
 A typical use case is for the macros to listen for events from custom user interface extensions. These extensions can be buttons and sliders for controlling peripherals in the room such as lights, blinds, climate controls, projectors, or to modify the behaviour of the video system to suit particular work flows, for example adding quick dials to the home screen.
 
-Since CE 9.7 (TODO VERIFY), the macros also support communicating with with the external world using HTTP GET, POST etc, greatly increasing their usability.
+The macros also support communicating with with the external world using HTTP GET, POST etc, greatly increasing their usability.
 
 Supported devices: All devices running CE 8 and higher, except SX10 and Webex Share (TODO VERIFY)
-Since: CE (TODO Find out).
+
 
 <div>
   <img src="images/ui-extensions.png" style="margin-left: 5%; width: 30%;" />
