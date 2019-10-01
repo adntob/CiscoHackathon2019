@@ -12,6 +12,7 @@ TODO Refer to git repo here
 * Macros - snippets of JavaScript code that customers can write that runs on the video system itself
 * jsxapi - JavaScript SDK for the xAPI, open source and available for eg Node.js
 * Cloud xAPI - RESTful xAPI access for cloud registered devices
+* Video device web interface - a web admin site on the video endpoints that lets you configure it
 * User interface extensions - panels, buttons and widgets that can be added to the user interface of the video device to allow user to control lights, blinds, make speed dials etc
 * In-room controls - the previous name for User interface extensions
 * Web apps - web pages running on the newer Webex devices with the Chromium web engine
@@ -250,7 +251,6 @@ TODO link and example here
 
 <img src="images/webapps.png" style="margin-left: 25%; width: 50%;" />
 
-
 The newer Webex devices with touch screens support web apps, which are basically web views with interactive content pointing to external URLs.
 
 Making web apps for the Cisco devices is basically like making any other web page, but you might want to optimise for the the use case of being on a shared device, as well as adjust sizes for big screen and tune performance.
@@ -258,6 +258,21 @@ Making web apps for the Cisco devices is basically like making any other web pag
 The web engine is powered by Chromium, so most of the stuff you expect from a full browser is available, such as HTML5 tags, EcmaScript 6 syntax, CSS3, local storage, canvas, SVG, web sockets etc. Note that only one "tab" is supported.
 
 Included is a web app for doing a simple white boarding. You can use this basis or inspiration for an alternative whiteboard with some features that you would like, such as a dedicated brain storming app, a whiteboard with shape support, automatic OCR etc.
+
+To add the web app to your video device:
+
+* Go to your video endpoints web admin interface
+* Select Integrations > UI Extensions Editor
+* Add new extension (web app)
+* Add a name, and set the url (your laptops ip and port)
+* Export the configuration
+* It should now appear on the home screen of your video device
+* Click the web app button to test it, click home to go back
+
+Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device.
+
+Config:
+`xConfig WebEngine RemoteDebugging: On`
 
 For full information on what the web engine supports, see the developer guide. TODO link
 

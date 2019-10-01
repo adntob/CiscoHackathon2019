@@ -1,5 +1,10 @@
-function init() {
-	const canvas = document.querySelector('canvas');
+// Quick way to select elements
+const $ = sel => document.querySelector(sel);
+
+let currentColor = 'rgb(0, 0, 0)';
+
+function initWhiteboard() {
+	const canvas = $('canvas');
 	paper.setup(canvas);
 
 	const { Point, PointText, Path, Tool } = paper;
@@ -22,7 +27,7 @@ function init() {
 		// Create a new path and set its stroke color to black:
 		path = new Path({
 			segments: [event.point],
-			strokeColor: 'black',
+			strokeColor: currentColor,
 			// Select the path, so we can see its segment points:
 			fullySelected: true
 		});
@@ -53,6 +58,22 @@ function init() {
 		const percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
 		textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
 	};
+}
+
+function initColorPalette() {
+	$('.colors').onclick = (e) => {
+		if (!e.target.classList.contains('color')) return;
+		const current = $('.color.selected');
+		if (current) current.classList.remove('selected');
+		e.target.classList.add('selected');
+		currentColor = e.target.style.backgroundColor;
+		console.log(currentColor);
+	}
+}
+
+function init() {
+	initWhiteboard();
+	initColorPalette();
 }
 
 window.onload = init;
