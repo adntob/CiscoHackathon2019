@@ -1,28 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Input, Modal, ModalBody, ModalHeader, ModalFooter } from '@momentum-ui/react';
-import * as jsxapi from 'jsxapi';
 
 export default function Connect(props) {
-  const { show, onError, onConnect } = props;
-  const [connecting, setConnecting] = useState(false);
+  const { connecting, show, onConnect } = props;
 
   const refs = {};
   const setRef = name => ref => refs[name] = ref;
 
-  const connect = (opts) => {
-    setConnecting(true);
-    const { hostname, username, password } = opts;
-    jsxapi.connect(`wss://${hostname}`, { username, password })
-      .on('error', onError)
-      .on('ready', onConnect);
-  };
-
   const doConnect = (event) => {
     event.preventDefault();
-    if (connecting) {
-      return;
-    }
-    connect({
+    onConnect({
       hostname: refs['hostname'].value,
       username: refs['username'].value,
       password: refs['password'].value,

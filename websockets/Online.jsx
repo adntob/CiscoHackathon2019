@@ -4,8 +4,10 @@ import { Button } from '@momentum-ui/react';
 export default function Online(props) {
   const { xapi, onDisconnect } = props;
   const [events, setEvents] = useState([]);
+  const [hostname, setHostname] = useState();
 
   useEffect(() => {
+    xapi.config.get('SystemUnit Name').then(setHostname);
     return xapi.feedback.on('Event', (event) => {
       setEvents(evs => evs.concat({
         timestamp: new Date(),
@@ -18,7 +20,7 @@ export default function Online(props) {
 
   return (
     <div>
-      <h2>Events</h2>
+      <h2>Events{!hostname ? '' : ` on ${hostname}`}</h2>
       <Button onClick={clearLog}>Clear log</Button>
       <Button color="red" onClick={onDisconnect}>Disconnect</Button>
       <pre className="event-list">
