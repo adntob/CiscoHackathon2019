@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const host = 'localhost';
 const port = 3000;
 const xapi = require('./xapi');
 
@@ -28,4 +29,7 @@ app.get('/isInCall', (req, res) => {
 // serve html files, assets etc from this folder:
 app.use(express.static('public'));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, host, () => {
+  const url = `http://${host}:${port}`;
+  console.log(`Example app running on ${url}`);
+});
