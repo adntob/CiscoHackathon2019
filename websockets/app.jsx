@@ -8,10 +8,18 @@ function App() {
   const [xapi, setXapi] = useState();
   const [error, setError] = useState();
 
+  const connected = !!xapi;
   const onConnect = (xapi) => { setXapi(xapi); };
-  const onError = (error) => { setError(error); };
+  const onError = (error) => {
+    setError(error);
+    if (xapi) {
+      xapi.close();
+      setXapi();
+    }
+  };
   const onDisconnect = () => {
     xapi.close();
+    setError();
     setXapi();
   };
 
@@ -20,10 +28,9 @@ function App() {
       <AlertBanner type="error" show={!!error}>
         {error}
       </AlertBanner>
-      {xapi ? (
+      <Connect show={!connected} onConnect={onConnect} onError={onError} />
+      {connected && (
         <Online xapi={xapi} onDisconnect={onDisconnect} />
-      ) : (
-        <Connect onConnect={onConnect} onError={onError} />
       )}
     </div>
   );
