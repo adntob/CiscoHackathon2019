@@ -8,6 +8,24 @@ The git repo with examples and this guide can be cloned here:
 
 `git clone git@bitbucket.org:bjolseth/ntnu-hackathon.git`
 
+## Quick start
+
+Running the examples require a working installation of
+[git](https://git-scm.com/) and [nodejs](https://nodejs.org/en/). Validate your
+setup by running the following commands:
+
+``` shell
+git clone git@bitbucket.org:bjolseth/ntnu-hackathon.git
+cd ntnu-hackathon
+npm install
+cd webserver
+node server.js
+```
+
+This should produce the following output, and start a webserver on http://localhost:3000:
+
+> Example app running on http://localhost:3000
+
 ## Mini dictionary
 
 * xAPI - the core protocol used to manipulate the video system, such as making calls, adjusting volume etc
