@@ -4,7 +4,9 @@ Cisco Webex Devices supports a large and varied API set. All components are well
 
 This guide gives a brief overview of the most important components ("puzzle pieces"), and some tips on when to choose one over the other. For each of the component, there is a runnable example as well.
 
-TODO Refer to git repo here
+The git repo with examples and this guide can be cloned here:
+
+`git clone git@bitbucket.org:bjolseth/ntnu-hackathon.git`
 
 ## Mini dictionary
 
@@ -12,7 +14,7 @@ TODO Refer to git repo here
 * Macros - snippets of JavaScript code that customers can write that runs on the video system itself
 * jsxapi - JavaScript SDK for the xAPI, open source and available for eg Node.js
 * Cloud xAPI - RESTful xAPI access for cloud registered devices
-* Video device web interface - a web admin site on the video endpoints that lets you configure it
+* Video device web interface - a web admin interface on the video endpoint that lets you configure it
 * User interface extensions - panels, buttons and widgets that can be added to the user interface of the video device to allow user to control lights, blinds, make speed dials etc
 * In-room controls - the previous name for User interface extensions
 * Web apps - web pages running on the newer Webex devices with the Chromium web engine
@@ -22,28 +24,28 @@ TODO Refer to git repo here
 For each integration type, you can read:
 - How it works
 - An example, and screenshot
-- When to use/not use it
+- Recommendations on when to use / not use it
 - Which devices support it
 - Required configs, flags, permissions, software versions
 - Link to more documentation
 
 ## xAPI
 
-The xAPI is the language for speaking to the video system. All integrations, and also Cisco's internal code such as the user interfaces, uses the xAPI to communicate with the video system and retrieve status data.
+The xAPI is the language for speaking to the video system. All integrations, and also Cisco's internal code such as the user interfaces, uses the xAPI to communicate with the video system.
 
 <img src="images/xapi-tshell.png" style="width: 50%; margin-left: 25%" />
 
 ### Examples
 
-The easiest way to play with the xAPI is to login with TShell from the command line. Here's how you can start a call using the xAPI and SSH from your laptop:
+The easiest way to play with the xAPI is to login with `TShell` from the command line. Here's how you can start a call using the xAPI and SSH from your laptop:
 
 * Open a console terminal
 
-* Connect to your video endpoint (replace the ip addresse with your video devices addresse):
+* Connect to your video endpoint (replace the ip address with your video devices address):
 
 `ssh admin@10.47.90.231`
 
-* Once you are in, you can start browsing the api tree with autocomplete (use the tab key often)
+* Once you are in, you can start browsing the api tree with auto complete (use the tab key)
 
 * `xCommand`, `xStatus` and `xConfig` are good starting points
 
@@ -61,28 +63,26 @@ The easiest way to play with the xAPI is to login with TShell from the command l
 
 * Observe that you now get a message any time a call is started or stopped.
 
-That's a super short overview of the main features of the xAPI. You can use the xAPI to control and observe almost anything that the video system supports, such as starting calls, adding participants, doing screen share, controlling camera, adjusting volume, muting, changing video layout etc.
+* You can listen to events to. To listen to all of time (for learning):
 
-The best way to get the xAPI is to just play with it from the command line. Try to think of work flows that you would like to automate (start a call, add a third participant, adjust the volume to a certain setting, turn on sticky self view, choose equal layout etc) and see if you can do it all from the keyboard.
+`xFeedback Register event/*`
+
+
+That's a super short overview of the main features of the xAPI. You can use it to control and observe almost anything that the video system supports, such as starting calls, adding participants, doing screen share, controlling camera, adjusting volume, muting, changing video layout etc.
+
+The best way to learn the xAPI is to just play with it from the command line. Try to think of work flows that you would like to automate (start a call, add a third participant, adjust the volume to a certain setting, turn on sticky self view, choose equal layout etc) and see if you can do it all from the keyboard.
 
 For a full reference guide, see:
 
 https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html
 
-TODO: add xevents
-
 ## Macros and user interface extensions
 
-Macros are snippets of code (scripts) written in JavaScript that can run on the video system itself, to customise the behaviour of the video system. A benefit of this is that you do not need any additional hardware, such as virtual machines or mini servers. Macros are typically written and tested in the macro editor, which can be accessed on the web interface of the video system itself.
+Macros are snippets of code (scripts) written in JavaScript that can run on the video system itself, to customise the behaviour and automate common tasks. A benefit of this is that you do not need any additional hardware, such as virtual machines, Raspberry PIs or similar. Macros are typically written and tested in the macro editor, which can be accessed on the web interface of the video system itself.
 
 A typical use case is for the macros to listen for events from custom user interface extensions. These extensions can be buttons and sliders for controlling peripherals in the room such as lights, blinds, climate controls, projectors, or to modify the behaviour of the video system to suit particular work flows, for example adding quick dials to the home screen.
 
-The macros also support communicating with with the external world using HTTP GET, POST etc, greatly increasing their usability.
-
-Supported devices: All devices running CE 8 and higher, except SX10 and Webex Share (TODO VERIFY)
-
-
-Deployments: both on-prem and cloud
+The macros also support communicating with with the external world using HTTP GET, POST etc.
 
 Required configuration: `xConfiguration Macro Mode: On` (can be enabled in macro editor too)
 
@@ -121,11 +121,13 @@ Documentation: TODO link
 
 ## User interface Extensions
 
-User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also make controls that makes it easier to access features of the video system that you frequently use.
+User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also shortcuts to features that you frequently use on the video system.
 
-The custom interfaces can be created easily the the drag and drop extensions editor on the video device itself. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
+The custom interfaces can be created easily with the drag and drop extensions editor from the web interface. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
 
 The custom user interface extensions contain basic UI elements such as buttons, toggles, sliders and tabs. If you need more advanced user interfaces, such as a map, consider using a web app instead.
+
+The editor is availabl from the video device's web interface in the `Integrations` sub menu.
 
 TODO link to inroom docs here
 
@@ -175,17 +177,18 @@ const xapi = jsxapi.connect('ssh://' + codec.host, {
 xapi.command('Dial', { Number: 'fireplace@ivr.vc' });
 ```
 
-Test the runnable example in the `jsxapi` folder, edit your codec settings in `main.js`. It should connect, call the fireplace then automatically disconnect and quit. To run it, cd to `jsxapi` folder in your shell and type:
+Test the runnable example in the `jsxapi` folder, edit your codec settings in `main.js`. It should connect, call the fireplace then automatically disconnect and quit. To run it:
 
-`node main.js`
+```
+cd jsxapi
+node main.js
+```
 
-The above setup is a good starting point if you need to listen to events from the video system and perform actions based on it.
+The above setup is a good starting point to expand on if you need to listen to events from the video system and perform actions based on it.
 
-### Requirements
+### Configs
 
-The jsxapi should work with any video system that has xAPI.
-
-Required configs:
+The jsxapi should work with any video system that has xAPI. Required configs:
 
 ```
 xConfiguration NetworkServices Mode: On
@@ -195,7 +198,7 @@ xConfiguration NetworkServices Mode: On
 
 <img src="images/webpage.png" style="margin-left: 25%; width: 50%;" />
 
-If you want people to be able to interact with the jsxapi above from other devices than eg the Cisco Touch 10, a simple way is to integrate the jsxapi with a web server. Strictly speaking, this has nothing to do with Webex APIs, but we have included an example here anyway to get you quickly started.
+If you want people to be able to interact with the jsxapi from their laptop or mobile devices, a simple way is to integrate the jsxapi with a web server. Strictly speaking, this has nothing to do with Webex APIs, but we have included an example here anyway to get you quickly started.
 
 Express is a minimal Node.js web server that's easy to set up. After installing it with npm, you can embed it with jsxapi like this:
 
@@ -227,9 +230,9 @@ Check out the full example in the `webserver` folder of the Git repo. If you hav
 `npm install` in the repo's root directory to install dependencies. cd to the `webserver` folder,
 then type `node server.js` to start the server.
 
-Visiting `http://localhost:3000` in your browser should give you a page to dial.
+Visiting `http://localhost:3000` in your browser should show you a simple page where you can place and end a call.
 
-You can test the server itself by typing this in your browser's URL bar:
+You can test the server itself (without the web page) by typing this in your browser's URL bar:
 
 `http://localhost:3000/call/fireplace@ivr.vc`
 
@@ -257,38 +260,40 @@ Making web apps for the Cisco devices is basically like making any other web pag
 
 The web engine is powered by Chromium, so most of the stuff you expect from a full browser is available, such as HTML5 tags, EcmaScript 6 syntax, CSS3, local storage, canvas, SVG, web sockets etc. Note that only one "tab" is supported.
 
-Included is a web app for doing a simple white boarding. You can use this basis or inspiration for an alternative whiteboard with some features that you would like, such as a dedicated brain storming app, a whiteboard with shape support, automatic OCR etc.
+Included is a web app for doing simple white boarding, with automatic line straightening. You can use this basis or inspiration for an alternative whiteboard with some features that you would like, such as a dedicated brain storming app, a whiteboard with shape support, automatic OCR etc. See http://paperjs.org/ for API, this is of course just one of thousands of JavaScript libraries you can use to create cool web app features.
 
 To add the web app to your video device:
 
-* Go to your video endpoints web admin interface
-* Select Integrations > UI Extensions Editor
+* Start the UI Extensions editor
 * Add new extension (web app)
-* Add a name, and set the url (your laptops ip and port)
+* Add a name, and set the url (the ip and port for the web server on your laptop)
 * Export the configuration
 * It should now appear on the home screen of your video device
 * Click the web app button to test it, click home to go back
 
-The favicon that the web page includes, is automatically used as icon on the home screen.
+The video device automatically uses the favicon on the home screen, if your web page provides one.
 
-Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device. Config:
-`xConfig WebEngine RemoteDebugging: On`
+Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device.
+
+Config:
+* Set `xConfig WebEngine RemoteDebugging: On`
+* Open `10.47.90.231:9222` in Chrome on your laptop (replace ip)
 
 For full information on what the web engine supports, see the developer guide. TODO link
 
-## Design guidelines
+## Design guidelines and assets
 
-If you design your own apps to be used specifically for Webex devices, you might like to use the Cisco styles, such as fonts, icons and colors. These are freely available at momentum.design.
+If you design your own apps to be used specifically for Webex devices, you might like to use the Cisco styles, such as fonts, icons and colours. These are freely available at momentum.design.
 
 <img src="images/design.png" style="margin-left: 25%; width: 50%;" />
 
 
-Remaining examples
+TODO:
 
-* web sockets: call, show events
+* Direct web socket xapi
+web sockets directly from browser: call, show events
 
 unsure
 * bot, integrations, webex api
 * cloud xapi
-* http putxml / postman stuff
-* http feedback
+* http putxml / postman stuff, http feedback

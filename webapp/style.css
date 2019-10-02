@@ -1,3 +1,7 @@
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 body, html {
   height: 100%;
   padding: 0;
@@ -11,6 +15,11 @@ body {
 #whiteboard-canvas {
   width: 100%;
   height: calc(100% - 100px);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
 }
 
 .colors {
@@ -34,4 +43,22 @@ body {
 
 .color.selected {
   border-color: white;
+}
+
+#clear-all {
+  border: 1px solid red;
+  color: red;
+  border-radius: 30px;
+  height: 100%;
+  background: transparent;
+  padding: 9px 30px;
+  font-size: 30px;
+  cursor: pointer;
+  margin: 0 1em;
+  outline: 0;
+}
+
+#clear-all:active {
+  background: red;
+  color: white;
 }

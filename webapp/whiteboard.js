@@ -1,7 +1,13 @@
-// Quick way to select elements
-const $ = sel => document.querySelector(sel);
+// Expanded on example from http://paperjs.org/examples/path-simplification/
+
+const MinimumLineLength = 100;
+const StraightIsh = 0.95;
+const StrokeWidth = 3;
 
 let currentColor = 'rgb(0, 0, 0)';
+
+// Quick way to select elements
+const $ = sel => document.querySelector(sel);
 
 function initWhiteboard() {
 	const canvas = $('canvas');
@@ -28,6 +34,7 @@ function initWhiteboard() {
 		path = new Path({
 			segments: [event.point],
 			strokeColor: currentColor,
+			strokeWidth: StrokeWidth,
 			// Select the path, so we can see its segment points:
 			fullySelected: true
 		});
@@ -46,18 +53,37 @@ function initWhiteboard() {
 	// When the mouse is released, we simplify the path:
 	tool.onMouseUp = (event) => {
 		const segmentCount = path.segments.length;
+		// console.log('length', path.length);
+		const start = path.firstSegment.point;
+		const stop = path.lastSegment.point;
+		const length = new Point(start.x - stop.x, start.y - stop.y).length;
+		const straightness = length / path.length;
+		if (length > MinimumLineLength && straightness > StraightIsh) {
+			path.remove();
+			const line = new Path({
+				segments: [start, stop],
+				strokeColor: currentColor,
+				strokeWidth: StrokeWidth,
+				fullySelected: false,
+			});
+		}
+		else {
+			// When the mouse is released, simplify it:
+			path.simplify(10);
 
-		// When the mouse is released, simplify it:
-		path.simplify(10);
+			// Select the path, so we can see its segments:
+			path.fullySelected = true;
 
-		// Select the path, so we can see its segments:
-		path.fullySelected = true;
-
-		const newSegmentCount = path.segments.length;
-		const difference = segmentCount - newSegmentCount;
-		const percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
-		textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
+			const newSegmentCount = path.segments.length;
+			const difference = segmentCount - newSegmentCount;
+			const percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
+			textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
+		}
 	};
+}
+
+function clearAll() {
+	paper.project.clear();
 }
 
 function initColorPalette() {
@@ -67,8 +93,8 @@ function initColorPalette() {
 		if (current) current.classList.remove('selected');
 		e.target.classList.add('selected');
 		currentColor = e.target.style.backgroundColor;
-		console.log(currentColor);
 	}
+	$('#clear-all').onclick = clearAll;
 }
 
 function init() {
