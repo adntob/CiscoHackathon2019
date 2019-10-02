@@ -72,9 +72,10 @@ That's a super short overview of the main features of the xAPI. You can use it t
 
 The best way to learn the xAPI is to just play with it from the command line. Try to think of work flows that you would like to automate (start a call, add a third participant, adjust the volume to a certain setting, turn on sticky self view, choose equal layout etc) and see if you can do it all from the keyboard.
 
-For a full reference guide, see:
+See more:
 
-https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html
+* Cisco DevNet tutorial: https://developer.cisco.com/learning/lab/collab-xapi-intro/step/1
+* Full RoomOS doc: https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html
 
 ## Macros and user interface extensions
 
@@ -115,9 +116,10 @@ function guiEvent(event) {
 xapi.event.on('UserInterface Extensions Panel Clicked', guiEvent);
 ```
 
-See the `macro-user-extensions` example in the Git repo for the UI Extensions file and the macro.
+See more:
 
-Documentation: TODO link
+* See the `macro-user-extensions` example in the Git repo for the UI Extensions file and the macro.
+* Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
 
 ## User interface Extensions
 
@@ -129,11 +131,18 @@ The custom user interface extensions contain basic UI elements such as buttons, 
 
 The editor is availabl from the video device's web interface in the `Integrations` sub menu.
 
-TODO link to inroom docs here
+* Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
+
 
 ## jsxapi and Node.js
 
 The same JavaScript that was used in the macro above can also be run on an external Node server with almost no modifications, for example in a virtual machine or a Raspberry Pi. For this, we recommend the jsxapi, which are JavaScript bindings (SDK) for talking to the video system.
+
+Links:
+
+* Npm: https://www.npmjs.com/package/jsxapi
+* Github: https://github.com/cisco-ce/jsxapi
+* More examples: https://github.com/ObjectIsAdvantag/xapi-samples/tree/master/jsxapi
 
 Requirements for this solution:
 
@@ -243,12 +252,16 @@ It should place a call. The following request should hang up:
 
 ## xAPI over web socket
 
-In the example above, the web page is talking to the video device via an Express web server. Since CE 9.8 (TODO verify) it is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server to handle the communication.
+In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication.
 
 Please note that this solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device.
 
-TODO link and example here
+Required configs:
 
+```
+xConfiguration NetworkServices HTTP Mode: HTTP+HTTPS
+xConfiguration NetworkServices WebSocket: On
+```
 
 ## Web apps
 
@@ -273,6 +286,9 @@ To add the web app to your video device:
 
 The video device automatically uses the favicon on the home screen, if your web page provides one.
 
+<img src="images/webapp-whiteboard2.png" style="margin-left: 25%; width: 50%;" />
+
+
 Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device.
 
 Config:
@@ -287,13 +303,16 @@ If you design your own apps to be used specifically for Webex devices, you might
 
 <img src="images/design.png" style="margin-left: 25%; width: 50%;" />
 
+Links:
+
+* momentum.design
 
 TODO:
 
 * Direct web socket xapi
 web sockets directly from browser: call, show events
 
-unsure
-* bot, integrations, webex api
-* cloud xapi
-* http putxml / postman stuff, http feedback
+Not documented at the moment:
+* Webex bots and integrations, webex API
+* Cloud xAPI
+* Old http api: "putxml" / Postman examples, http feedback
