@@ -6,7 +6,7 @@ This guide gives a brief overview of the most important components ("puzzle piec
 
 The git repo with examples and this guide can be cloned here:
 
-`git clone git@bitbucket.org:bjolseth/ntnu-hackathon.git`
+`git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git`
 
 ## Quick start
 
@@ -15,7 +15,7 @@ Running the examples require a working installation of
 setup by running the following commands:
 
 ``` shell
-git clone git@bitbucket.org:bjolseth/ntnu-hackathon.git
+git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git
 cd ntnu-hackathon
 npm install
 cd webserver
