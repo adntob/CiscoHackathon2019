@@ -28,16 +28,15 @@ This should produce the following output, and start a webserver on http://localh
 
 ## Mini dictionary
 
-* xAPI - the core protocol used to manipulate the video system, such as making calls, adjusting volume etc
-* Macros - snippets of JavaScript code that customers can write that runs on the video system itself
-* jsxapi - JavaScript SDK for the xAPI, open source and available for eg Node.js
-* Cloud xAPI - RESTful xAPI access for cloud registered devices
-* Video device web interface - a web admin interface on the video endpoint that lets you configure it
-* User interface extensions - panels, buttons and widgets that can be added to the user interface of the video device to allow user to control lights, blinds, make speed dials etc
-* In-room controls - the previous name for User interface extensions
-* Web apps - web pages running on the newer Webex devices with the Chromium web engine
-* xAPI over web socket - web browsers etc can speak directly to the xAPI over web socket, if it knows the username and password for the video system
-* Bot apis - rest apis and web hooks for sending/receiving bot messages on Webex Teams
+* **xAPI** - the core protocol used to manipulate the video system, such as making calls, adjusting volume etc
+* **Macros** - snippets of JavaScript code that customers can write that runs on the video system itself
+* **jsxapi** - JavaScript SDK for the xAPI, open source and available for eg Node.js
+* **Cloud xAPI** - RESTful xAPI access for cloud registered devices
+* **Web interface** - a web admin interface on the video endpoint that lets you configure it
+* **User interface extensions** - panels, buttons and widgets that can be added to the user interface of the video device to allow user to control lights, blinds, make speed dials etc
+* **Web apps** - web pages running on the newer Webex devices with the Chromium web engine
+* **xAPI over web socket** - web browsers etc can speak directly to the xAPI over web socket, if it knows the username and password for the video system
+* **Bot apis** - rest apis and web hooks for sending/receiving bot messages on Webex Teams
 
 For each integration type, you can read:
 - How it works
@@ -95,6 +94,25 @@ See more:
 * Cisco DevNet tutorial: https://developer.cisco.com/learning/lab/collab-xapi-intro/step/1
 * Full RoomOS doc: https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html
 
+## User interface Extensions
+
+<div>
+  <img src="images/ui-extensions.png" style="margin-left: 5%; width: 30%;" />
+  <img src="images/macro-editor.png" style="width: 30%;" />
+  <img src="images/webapps2.png" style="width: 30%; border: 1px solid #eee" />
+</div>
+
+User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also shortcuts to features that you frequently use on the video system.
+
+The custom interfaces can be created easily with the drag and drop extensions editor from the web interface. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
+
+The custom user interface extensions contain basic UI elements such as buttons, toggles, sliders and tabs. If you need more advanced user interfaces, such as a map, consider using a web app instead.
+
+The editor is available from the video device's web interface in the `Integrations` sub menu.
+
+* Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
+
+
 ## Macros and user interface extensions
 
 Macros are snippets of code (scripts) written in JavaScript that can run on the video system itself, to customise the behaviour and automate common tasks. A benefit of this is that you do not need any additional hardware, such as virtual machines, Raspberry PIs or similar. Macros are typically written and tested in the macro editor, which can be accessed on the web interface of the video system itself.
@@ -103,17 +121,13 @@ A typical use case is for the macros to listen for events from custom user inter
 
 The macros also support communicating with with the external world using HTTP GET, POST etc.
 
+<img src="images/macros.png" />
+
 Required configuration: `xConfiguration Macro Mode: On` (can be enabled in macro editor too)
 
 Documentation:
 * See TODO for full documentation
 * See the help section in macro editor for examples, and also a comprehensive tutorial
-
-<div>
-  <img src="images/ui-extensions.png" style="margin-left: 5%; width: 30%;" />
-  <img src="images/macro-editor.png" style="width: 30%;" />
-  <img src="images/homescreen.png" style="width: 30%; border: 1px solid #eee" />
-</div>
 
 *UI Extensions editor, macro editor and custom home screen*
 
@@ -138,19 +152,6 @@ See more:
 
 * See the `macro-user-extensions` example in the Git repo for the UI Extensions file and the macro.
 * Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
-
-## User interface Extensions
-
-User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also shortcuts to features that you frequently use on the video system.
-
-The custom interfaces can be created easily with the drag and drop extensions editor from the web interface. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
-
-The custom user interface extensions contain basic UI elements such as buttons, toggles, sliders and tabs. If you need more advanced user interfaces, such as a map, consider using a web app instead.
-
-The editor is availabl from the video device's web interface in the `Integrations` sub menu.
-
-* Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
-
 
 ## jsxapi and Node.js
 
@@ -223,7 +224,7 @@ xConfiguration NetworkServices Mode: On
 
 ### jsxapi with Express web server
 
-<img src="images/webpage.png" style="margin-left: 25%; width: 50%;" />
+<img src="images/jsxapi.png" />
 
 If you want people to be able to interact with the jsxapi from their laptop or mobile devices, a simple way is to integrate the jsxapi with a web server. Strictly speaking, this has nothing to do with Webex APIs, but we have included an example here anyway to get you quickly started.
 
@@ -257,6 +258,8 @@ Check out the full example in the `webserver` folder of the Git repo. If you hav
 `npm install` in the repo's root directory to install dependencies. cd to the `webserver` folder,
 then type `node server.js` to start the server.
 
+<img src="images/webpage.png" style="margin-left: 25%; width: 50%;" />
+
 Visiting `http://localhost:3000` in your browser should show you a simple page where you can place and end a call.
 
 You can test the server itself (without the web page) by typing this in your browser's URL bar:
@@ -273,6 +276,8 @@ It should place a call. The following request should hang up:
 In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication.
 
 Please note that this solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device.
+
+<img src="images/websockets.png" />
 
 Required configs:
 
