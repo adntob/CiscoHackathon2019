@@ -1,11 +1,9 @@
-# Disruptive technologies server
+# app
 
-A web server that accepts data from Disruptive Technologies sensors (temperature, touch, proxmity).
+A web app that sends HTTP requests to a Phillips Hue light bulb 
+
+Link to documentation:
 
 How to use:
 
-* npm install, it not done already
-* Setup ngrok on your laptop, so the Disruptive cloud service can call your laptop even if its on a local network
-* node dtsensors/sensors.js
-
-The running example will print out sensor data as soon as they occur.
+The running example will change color of light dependent on different states the device can have (Off, Halfwake, Standby, In call)
