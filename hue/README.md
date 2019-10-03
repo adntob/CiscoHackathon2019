@@ -1,5 +1,3 @@
-# app
-
 A web app that sends HTTP requests to a Phillips Hue light bulb 
 
 Link to documentation:
