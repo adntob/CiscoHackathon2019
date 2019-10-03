@@ -2,15 +2,33 @@
   "name": "ntnu-hackaton-2019",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "websockets": "parcel ./websockets/index.html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@momentum-ui/core": "^18.1.6",
+    "@momentum-ui/react": "^22.1.5",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "jsxapi": "^4.3.2"
+    "jsxapi": "^4.5.0",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "parcel-bundler": "^1.12.3"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/transform-runtime"
+    ],
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }

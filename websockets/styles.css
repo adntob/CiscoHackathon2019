@@ -1,0 +1,9 @@
+body {
+    padding: 10px;
+}
+
+.event-list {
+    border: 1px solid black;
+    margin-top: 10px;
+    min-height: 400px;
+}
