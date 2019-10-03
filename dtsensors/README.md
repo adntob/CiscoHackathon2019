@@ -2,6 +2,10 @@
 
 A web server that accepts data from Disruptive Technologies sensors (temperature, touch, proxmity).
 
+Documentation: https://studio.disruptive-technologies.com
+
+Hackathon project: https://studio.disruptive-technologies.com/projects/blrpjplbffle57fk5fc0/devices/bf7b1ut7rihlrv30lf3g
+
 How to use:
 
 * npm install, it not done already
