@@ -63,8 +63,8 @@ function notify(message) {
 function Hue(value){
     var options = {
         //IP of Hue bridge
-        host:'10.47.82.65',
-        path: '/api/DDN3HefWH1zbPdG6GIGxpBiKf5HzOeaPllmspHQo/lights/3/state',
+        host:'10.47.112.104',
+        path: '/api/X1PfeFwuPotKBQnnRC7OCWKoA5KJjM9k9O55GrwD/lights/3/state',
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
