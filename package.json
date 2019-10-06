@@ -4,8 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "websockets": "parcel ./websockets/index.html"
+    "disruptive": "node ./examples/disruptive-sensors/sensors.js",
+    "jsxapi": "node ./examples/jsxapi/mainl.js",
+    "websockets": "parcel ./examples/websockets/index.html"
   },
   "author": "",
   "license": "ISC",
