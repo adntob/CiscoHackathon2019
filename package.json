@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "disruptive": "node ./examples/disruptive-sensors/sensors.js",
+    "hue": "node ./examples/hue/hue.js",
     "jsxapi": "node ./examples/jsxapi/mainl.js",
     "websockets": "parcel ./examples/websockets/index.html"
   },
