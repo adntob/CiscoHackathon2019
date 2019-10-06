@@ -10,6 +10,6 @@ How to use:
 
 * npm install, it not done already
 * Setup ngrok on your laptop, so the Disruptive cloud service can call your laptop even if its on a local network
-* node dtsensors/sensors.js
+* npm run disruptive
 
 The running example will print out sensor data as soon as they occur.
