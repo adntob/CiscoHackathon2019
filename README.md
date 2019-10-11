@@ -42,8 +42,6 @@ This should produce the following output, and start a webserver on http://localh
 ## Mini dictionary
 
 * **xAPI** - the core protocol used to manipulate the video system, such as making calls, adjusting volume etc
-* **RoomOS** - Linux based operating system used on the Webex Devices
-* **CE** - Another name for RoomOS (Collaboration Endpoint)
 * **Macros** - snippets of JavaScript code that customers can write that runs on the video system itself
 * **jsxapi** - JavaScript SDK for the xAPI, open source and available for eg Node.js
 * **Cloud xAPI** - RESTful xAPI access for cloud registered devices
@@ -95,7 +93,7 @@ The easiest way to play with the xAPI is to login with `TShell` from the command
 
 * Observe that you now get a message any time a call is started or stopped.
 
-* You can listen to events too. To listen to all events (for learning and discovery):
+* You can listen to events to. To listen to all of time (for learning):
 
 `xFeedback Register event/*`
 
@@ -128,7 +126,7 @@ The editor is available from the video device's web interface in the `Integratio
 * Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
 
 
-## Macros
+## Macros and user interface extensions
 
 Macros are snippets of code (scripts) written in JavaScript that can run on the video system itself, to customise the behaviour and automate common tasks. A benefit of this is that you do not need any additional hardware, such as virtual machines, Raspberry PIs or similar. Macros are typically written and tested in the macro editor, which can be accessed on the web interface of the video system itself.
 
@@ -330,10 +328,13 @@ The video device automatically uses the favicon on the home screen, if your web 
 Note that you can turn on remote debugging. This lets you use Chrome's dev console on your laptop to view and manipulate the web app on the video device.
 
 Config:
+
 * Set `xConfig WebEngine RemoteDebugging: On`
 * Open `10.47.90.231:9222` in Chrome on your laptop (replace ip)
 
-For full information on what the web engine supports, see the developer guide. TODO link
+Links:
+
+* Web engine developer guide - http://custom-collab.cisco.com/roomos-webengine-devguide.pdf
 
 ## Design guidelines and assets
 
