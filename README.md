@@ -10,6 +10,19 @@ The git repo with examples and this guide can be cloned here:
 
 ## Quick start
 
+### Windows
+* Install git: https://git-for-windows.github.io/ - Make sure to select "Use Git from the Windows Command Prompt"
+* Install node: https://nodejs.org/en/download/
+* Start Windows Powershell App (Run as Administrator)
+
+### Mac
+TBD
+
+### Linux
+TBD
+
+
+### Running the examples
 Running the examples require a working installation of
 [git](https://git-scm.com/) and [nodejs](https://nodejs.org/en/). Validate your
 setup by running the following commands:
