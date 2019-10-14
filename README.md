@@ -31,7 +31,7 @@ setup by running the following commands:
 git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git
 cd ntnu-hackathon
 npm install
-cd webserver
+cd examples/webserver
 node server.js
 ```
 
@@ -93,7 +93,7 @@ The easiest way to play with the xAPI is to login with `TShell` from the command
 
 * Observe that you now get a message any time a call is started or stopped.
 
-* You can listen to events to. To listen to all of time (for learning):
+* You can listen to events to. To listen to all events (for learning):
 
 `xFeedback Register event/*`
 
@@ -132,7 +132,7 @@ Macros are snippets of code (scripts) written in JavaScript that can run on the 
 
 A typical use case is for the macros to listen for events from custom user interface extensions. These extensions can be buttons and sliders for controlling peripherals in the room such as lights, blinds, climate controls, projectors, or to modify the behaviour of the video system to suit particular work flows, for example adding quick dials to the home screen.
 
-The macros also support communicating with with the external world using HTTP GET, POST etc.
+The macros also support communicating with the external world using HTTP GET, POST etc.
 
 <img src="images/macros.png" />
 
@@ -221,7 +221,7 @@ xapi.command('Dial', { Number: 'fireplace@ivr.vc' });
 Test the runnable example in the `jsxapi` folder, edit your codec settings in `main.js`. It should connect, call the fireplace then automatically disconnect and quit. To run it:
 
 ```
-cd jsxapi
+cd examples/jsxapi
 node main.js
 ```
 
