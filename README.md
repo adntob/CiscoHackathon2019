@@ -4,6 +4,8 @@ Cisco Webex Devices supports a large and varied API set. All components are well
 
 This guide gives a brief overview of the most important components ("puzzle pieces"), and some tips on when to choose one over the other. For each of the component, there is a runnable example as well.
 
+<img src="images/jigsaw.png" style="margin-left: 25%; width: 50%;" />
+
 The git repo with examples and this guide can be cloned here:
 
 `git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git`
@@ -286,9 +288,11 @@ It should place a call. The following request should hang up:
 
 ## xAPI over web socket
 
-In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication.
+In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication. The jsxapi supports the web socket as a transport mechanism, so you are able to write almost the same code as with macros and the web server example above.
 
-Please note that this solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device.
+The provided example is a web page that sets up a direct web socket connection to a video system, then registers to receive all events. Like the other examples, it can be used as a basis to get quickly started, but it can also be used to inspect the events that the video system generates, since there is no documentation for that currently.
+
+The web socket solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device. Also, the end user needs to be on the same network as the device.
 
 <img src="images/websockets.png" />
 
