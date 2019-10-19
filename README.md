@@ -14,14 +14,17 @@ The git repo with examples and this guide can be cloned here:
 
 ### Windows
 * Install git: https://git-for-windows.github.io/ - Make sure to select "Use Git from the Windows Command Prompt"
-* Install node: https://nodejs.org/en/download/
+* Install node: https://nodejs.org/dist/v10.16.3/node-v10.16.3-x86.msi
 * Start Windows Powershell App (Run as Administrator)
 
 ### Mac
-TBD
+* Install git: https://desktop.github.com/
+* Install node: https://nodejs.org/dist/v10.16.3/node-v10.16.3.pkg
+* Install brew: https://brew.sh
 
 ### Linux
-TBD
+* sudo apt install git
+* sudo apt install nodejs
 
 
 ### Running the examples
