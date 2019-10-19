@@ -12,25 +12,28 @@ The git repo with examples and this guide can be cloned here:
 
 ## Quick start
 
-### Windows
+### Running the examples
+Running the examples require a working installation of
+[git] and [nodejs]:
+
+**Windows:**
+
 * Install git: https://git-for-windows.github.io/ - Make sure to select "Use Git from the Windows Command Prompt"
 * Install node: https://nodejs.org/dist/v10.16.3/node-v10.16.3-x86.msi
 * Start Windows Powershell App (Run as Administrator)
 
-### Mac
+**macOS:**
+
 * Install git: https://desktop.github.com/
 * Install node: https://nodejs.org/dist/v10.16.3/node-v10.16.3.pkg
 * Install brew: https://brew.sh
 
-### Linux
+**Linux:**
+
 * sudo apt install git
 * sudo apt install nodejs
 
-
-### Running the examples
-Running the examples require a working installation of
-[git](https://git-scm.com/) and [nodejs](https://nodejs.org/en/). Validate your
-setup by running the following commands:
+Validate your setup by running the following commands:
 
 ``` shell
 git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git
@@ -57,12 +60,13 @@ This should produce the following output, and start a webserver on http://localh
 * **Bot apis** - rest apis and web hooks for sending/receiving bot messages on Webex Teams
 
 For each integration type, you can read:
-- How it works
-- An example, and screenshot
-- Recommendations on when to use / not use it
-- Which devices support it
-- Required configs, flags, permissions, software versions
-- Link to more documentation
+
+* How it works
+* An example, and screenshot
+* Recommendations on when to use / not use it
+* Which devices support it
+* Required configs, flags, permissions, software versions
+* Link to more documentation
 
 ## xAPI
 
