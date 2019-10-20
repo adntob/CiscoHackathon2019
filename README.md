@@ -1,58 +1,23 @@
 # Webex Devices Integrations - High level overview
 
-Cisco Webex Devices supports a large and varied API set. All components are well documented by themselves, but it can be overwhelming for customers and developers to understand which API technology to choose, and why.
+Cisco Webex Devices supports a large and varied API set. All components are well documented individually, but it can be overwhelming initially for developers and customers to understand which API technology to use, and why.
 
-This guide gives a brief overview of the most important components ("puzzle pieces"), and some tips on when to choose one over the other. For each of the component, there is a runnable example as well.
+<img src="images/jigsaw.png" style="margin-left: 15%; width: 70%;" />
 
-<img src="images/jigsaw.png" style="margin-left: 25%; width: 50%;" />
+This guide gives a brief overview of the most important components ("puzzle pieces"), and some tips on when to choose one over the other. For each component, there are runnable examples as well, to give you a taste of how it works and to get quickly started.
 
-The git repo with examples and this guide can be cloned here:
+Read the separate install guide (INSTALL.md) for how to set up the examples on your laptop.
+
+This guide and the examples can be found by cloning the public Git repository:
 
 `git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git`
 
-## Quick start
-
-### Running the examples
-Running the examples require a working installation of
-[git] and [nodejs]:
-
-**Windows:**
-
-* Install git: https://git-for-windows.github.io/ - Make sure to select "Use Git from the Windows Command Prompt"
-* Install node: https://nodejs.org/dist/v10.16.3/node-v10.16.3-x86.msi
-* Start Windows Powershell App (Run as Administrator)
-
-**macOS:**
-
-* Install git: https://desktop.github.com/
-* Install node: https://nodejs.org/dist/v10.16.3/node-v10.16.3.pkg
-* Install brew: https://brew.sh
-
-**Linux:**
-
-* sudo apt install git
-* sudo apt install nodejs
-
-Validate your setup by running the following commands:
-
-``` shell
-git clone https://bitbucket.org/bjolseth/ntnu-hackathon.git
-cd ntnu-hackathon
-npm install
-cd examples/webserver
-node server.js
-```
-
-This should produce the following output, and start a webserver on http://localhost:3000:
-
-> Example app running on http://localhost:3000
 
 ## Mini dictionary
 
 * **xAPI** - the core protocol used to manipulate the video system, such as making calls, adjusting volume etc
 * **Macros** - snippets of JavaScript code that customers can write that runs on the video system itself
 * **jsxapi** - JavaScript SDK for the xAPI, open source and available for eg Node.js
-* **Cloud xAPI** - RESTful xAPI access for cloud registered devices
 * **Web interface** - a web admin interface on the video endpoint that lets you configure it
 * **User interface extensions** - panels, buttons and widgets that can be added to the user interface of the video device to allow user to control lights, blinds, make speed dials etc
 * **Web apps** - web pages running on the newer Webex devices with the Chromium web engine
@@ -113,26 +78,25 @@ The best way to learn the xAPI is to just play with it from the command line. Tr
 
 See more:
 
-* Cisco DevNet tutorial: https://developer.cisco.com/learning/lab/collab-xapi-intro/step/1
-* Full RoomOS doc: https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html
+* Full API doc: See the api guide in the reference-docs folder
+* More examples in the examples/xapi folder
 
 ## User interface Extensions
 
 <div>
-  <img src="images/ui-extensions.png" style="margin-left: 5%; width: 30%;" />
-  <img src="images/macro-editor.png" style="width: 30%;" />
-  <img src="images/webapps2.png" style="width: 30%; border: 1px solid #eee" />
+  <img src="images/ui-extensions.png" style="margin-left: 5%; width: 40%;" />
+  <img src="images/webapps2.png" style="width: 40%; border: 1px solid #eee" />
 </div>
 
-User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also shortcuts to features that you frequently use on the video system.
+User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also add shortcuts to features that you frequently use on the video system.
 
 The custom interfaces can be created easily with the drag and drop extensions editor from the web interface. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
 
-The custom user interface extensions contain basic UI elements such as buttons, toggles, sliders and tabs. If you need more advanced user interfaces, such as a map, consider using a web app instead.
+The custom user interface extensions contain basic UI elements such as buttons, toggles, sliders and tabs. They generate basic events, so they can be used to control virtually anything you choose. If you need advanced user interfaces, with polished graphics or eg a clickable map, consider using a web app instead.
 
 The editor is available from the video device's web interface in the `Integrations` sub menu.
 
-* Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
+* Full documentation: See the customization guide in the reference-docs folder
 
 
 ## Macros and user interface extensions
@@ -145,11 +109,13 @@ The macros also support communicating with the external world using HTTP GET, PO
 
 <img src="images/macros.png" />
 
+<img src="images/macro-editor.png" style="width: 60%;margin-left: 20%" />
+
+
 Required configuration: `xConfiguration Macro Mode: On` (can be enabled in macro editor too)
 
 Documentation:
-* See TODO for full documentation
-* See the help section in macro editor for examples, and also a comprehensive tutorial
+* See the help section in macro editor for examples, and also the tutorial available there
 
 *UI Extensions editor, macro editor and custom home screen*
 
@@ -169,11 +135,6 @@ function guiEvent(event) {
 
 xapi.event.on('UserInterface Extensions Panel Clicked', guiEvent);
 ```
-
-See more:
-
-* See the `macro-user-extensions` example in the Git repo for the UI Extensions file and the macro.
-* Full documentation: https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce98/sx-mx-dx-room-kit-boards-customization-guide-ce98.pdf
 
 ## jsxapi and Node.js
 
@@ -200,11 +161,7 @@ The main benefits over a macro integration:
 
 ### Example
 
-For this example to work, you need to have Node and npm installed. Search the web for how to install for your operating system if you don't have it already.
-
-Make sure the jsxapi bindings are downloaded and installed by typing `npm install` in the root folder of the Git repo.
-
-Starting a call now from an external server is easy, if you have the username and password to log on to the video system:
+For this example to work, you need to have Node and npm installed. Starting a call now from an external server is easy and can be done with very similar to the macros.
 
 ```
 // Import the library for talking with the xAPI
@@ -297,7 +254,7 @@ It should place a call. The following request should hang up:
 
 In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication. The jsxapi supports the web socket as a transport mechanism, so you are able to write almost the same code as with macros and the web server example above.
 
-The provided example is a web page that sets up a direct web socket connection to a video system, then registers to receive all events. Like the other examples, it can be used as a basis to get quickly started, but it can also be used to inspect the events that the video system generates, since there is no documentation for that currently.
+The provided example is a web page that sets up a direct web socket connection to a video system, then registers to receive all events. Like the other examples, it can be used as a basis to get quickly started, but it is also a tool to inspect the events that the video system generates, since there is no documentation for that currently.
 
 The web socket solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device. Also, the end user needs to be on the same network as the device.
 
@@ -318,7 +275,7 @@ The newer Webex devices with touch screens support web apps, which are basically
 
 Making web apps for the Cisco devices is basically like making any other web page, but you might want to optimise for the the use case of being on a shared device, as well as adjust sizes for big screen and tune performance.
 
-The web engine is powered by Chromium, so most of the stuff you expect from a full browser is available, such as HTML5 tags, EcmaScript 6 syntax, CSS3, local storage, canvas, SVG, web sockets etc. Note that only one "tab" is supported.
+The web engine is powered by Chromium, so most of the features you expect from a full browser is available, such as HTML5 tags, EcmaScript 6 syntax, CSS3, local storage, canvas, SVG, web sockets etc. Note that only one "tab" is supported.
 
 Included is a web app for doing simple white boarding, with automatic line straightening. You can use this basis or inspiration for an alternative whiteboard with some features that you would like, such as a dedicated brain storming app, a whiteboard with shape support, automatic OCR etc. See http://paperjs.org/ for API, this is of course just one of thousands of JavaScript libraries you can use to create cool web app features.
 
@@ -347,22 +304,33 @@ Links:
 
 * Web engine developer guide - http://custom-collab.cisco.com/roomos-webengine-devguide.pdf
 
+## Webex APIs and Bots
+
+A very powerful feature of the Webex platform is the Bot API. It allows user to communicate with bots for automated services. This works on both laptop and clients with Webex Teams.
+
+A bot is similar to a user, and very easy to create. It can join conversations and answer direct messages and group chats where it is mentioned. An example is a bot that translates messages, sends reminders,
+
+Recently Cisco also added **adaptive cards** API, making it easy to add buttons and simple user interface elements to the bot conversations. This facilitates services such as polls, simple calendars etc.
+
+Sending a message to a person from a bot is just a simple REST call. Whenever a message is sent to the bot, the Webex cloud notifies your web server with **web hooks**. If your bot server is behind a firewall or intranet, you can use **ngrok** to relay the messages (for temporary test purposes).
+
+<img src="images/bots.png" style="margin-left: 25%; width: 50%;" />
+
+
+The developer.webex.com site provides interactive ways to test your bots easily and learn the API, making it very easy to get started.
+
+Links:
+
+* https://developer.webex.com/
+
 ## Design guidelines and assets
 
 If you design your own apps to be used specifically for Webex devices, you might like to use the Cisco styles, such as fonts, icons and colours. These are freely available at momentum.design.
+
+The web socket example above is using the Momentum design assets, see that for an example on how to integrate with React.
 
 <img src="images/design.png" style="margin-left: 25%; width: 50%;" />
 
 Links:
 
-* momentum.design
-
-TODO:
-
-* Direct web socket xapi
-web sockets directly from browser: call, show events
-
-Not documented at the moment:
-* Webex bots and integrations, webex API
-* Cloud xAPI
-* Old http api: "putxml" / Postman examples, http feedback
+* momentum.design - find the design resources here

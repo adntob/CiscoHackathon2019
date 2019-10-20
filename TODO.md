@@ -17,3 +17,22 @@ jsxapi
 web sockets
 web apps
 webex teams api
+
+
+Device features to present:
+place calls
+presentation wireless
+proximity, teams client
+move call from phone to device
+camera tracking
+whiteboarding, stickies, extended canvas, pen sizes
+annotating
+bind with space, files
+web app
+head detection
+diagnostic menu
+bluetooth pairing?
+signage
+macros, userinterface extensions
+halfwake background
+assistant
