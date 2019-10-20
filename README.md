@@ -1,4 +1,4 @@
-# Webex Devices Integrations - High level overview
+# Webex Device API Overview
 
 Cisco Webex Devices supports a large and varied API set. All components are well documented individually, but it can be overwhelming initially for developers and customers to understand which API technology to use, and why.
 
@@ -21,8 +21,8 @@ This guide and the examples can be found by cloning the public Git repository:
 * **Web interface** - a web admin interface on the video endpoint that lets you configure it
 * **User interface extensions** - panels, buttons and widgets that can be added to the user interface of the video device to allow user to control lights, blinds, make speed dials etc
 * **Web apps** - web pages running on the newer Webex devices with the Chromium web engine
-* **xAPI over web socket** - web browsers etc can speak directly to the xAPI over web socket, if it knows the username and password for the video system
-* **Bot apis** - rest apis and web hooks for sending/receiving bot messages on Webex Teams
+* **xAPI over web socket** - web browsers etc can speak directly to the xAPI over web socket
+* **Bot apis** - REST apis and web hooks for sending/receiving bot messages on Webex Teams
 
 For each integration type, you can read:
 
@@ -88,7 +88,7 @@ See more:
   <img src="images/webapps2.png" style="width: 40%; border: 1px solid #eee" />
 </div>
 
-User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also add shortcuts to features that you frequently use on the video system.
+User interface extensions allow you to add new UI elements to the Webex devices. For example, you can make panels with buttons for controlling the light in the room, adjusting the temperature, controlling the projector, or reporting technical problems. You can also add shortcuts to features that you frequently use on the video system. Web apps can also be added from here.
 
 The custom interfaces can be created easily with the drag and drop extensions editor from the web interface. When a user interacts with a widget, an event is generated that you can listen to in either a macro or with an external integration such as the jsxapi. Based on the id of the widget, you can then choose what actions to perform.
 
@@ -254,7 +254,7 @@ It should place a call. The following request should hang up:
 
 In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication. The jsxapi supports the web socket as a transport mechanism, so you are able to write almost the same code as with macros and the web server example above.
 
-The provided example is a web page that sets up a direct web socket connection to a video system, then registers to receive all events. Like the other examples, it can be used as a basis to get quickly started, but it is also a tool to inspect the events that the video system generates, since there is no documentation for that currently.
+The provided example is a web page that sets up a direct web socket connection to a video system, then registers to receive all events. Like the other examples, it can be used as a basis to get quickly started, but it is also a tool to inspect the events that the video system generates.
 
 The web socket solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device. Also, the end user needs to be on the same network as the device.
 
@@ -300,17 +300,17 @@ Config:
 * Set `xConfig WebEngine RemoteDebugging: On`
 * Open `10.47.90.231:9222` in Chrome on your laptop (replace ip)
 
-Links:
+Docs:
 
-* Web engine developer guide - http://custom-collab.cisco.com/roomos-webengine-devguide.pdf
+* See the web engine developer guide in `reference-docs/`
 
 ## Webex APIs and Bots
 
-A very powerful feature of the Webex platform is the Bot API. It allows user to communicate with bots for automated services. This works on both laptop and clients with Webex Teams.
+A powerful feature of the Webex platform is the Bot API. It allows user to communicate with bots for automated services. This works on both laptop and clients with Webex Teams.
 
-A bot is similar to a user, and very easy to create. It can join conversations and answer direct messages and group chats where it is mentioned. An example is a bot that translates messages, sends reminders,
+A bot is similar to a user, and easy to create. It can join conversations and answer direct messages and group chats where it is mentioned. An example is a bot that translates messages, sends reminders, or creates polls.
 
-Recently Cisco also added **adaptive cards** API, making it easy to add buttons and simple user interface elements to the bot conversations. This facilitates services such as polls, simple calendars etc.
+Recently Cisco also added a **cards** API, making it easy to add buttons and simple user interface elements to the bot conversations. This facilitates services such as polls, simple calendars etc.
 
 Sending a message to a person from a bot is just a simple REST call. Whenever a message is sent to the bot, the Webex cloud notifies your web server with **web hooks**. If your bot server is behind a firewall or intranet, you can use **ngrok** to relay the messages (for temporary test purposes).
 
