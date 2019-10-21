@@ -20,7 +20,8 @@
     "http": "0.0.0",
     "jsxapi": "^4.5.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "webex": "^1.80.29"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
