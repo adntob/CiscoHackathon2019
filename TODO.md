@@ -4,19 +4,10 @@ TODO
 
 Presentation
 
-What the video system can do
-Our api strategy: building bridges, not islands
-The git repo, what it is, how to check out
-
-Components:
-xapi
-xapi with command line (demo)
-user interface extensions
-macros
-jsxapi
-web sockets
-web apps
-webex teams api
+- Our api strategy: building bridges, not islands
+- The git repo, what it is, how to check out
+- Header title for each puzzle piece
+- Add hackathon logo to front page
 
 
 Device features to present:
