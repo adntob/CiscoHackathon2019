@@ -254,6 +254,9 @@ It should place a call. The following request should hang up:
 
 In the example above, the web page is talking to the video device via an Express web server. It is also possible to connect directly to the video device using web sockets, eg from a web page. This means you do not need a dedicated web server in between to handle the communication. The jsxapi supports the web socket as a transport mechanism, so you are able to write almost the same code as with macros and the web server example above.
 
+<img src="images/websocket-client.png" />
+
+
 The provided example is a web page that sets up a direct web socket connection to a video system, then registers to receive all events. Like the other examples, it can be used as a basis to get quickly started, but it is also a tool to inspect the events that the video system generates.
 
 The web socket solution requires that the web page contains the username and password to connect to the video system, so it should only be used for integrations where the end user is trusted access to the video system, such as web pages for administering the video device. Also, the end user needs to be on the same network as the device.

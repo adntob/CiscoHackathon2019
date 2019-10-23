@@ -4,10 +4,9 @@ TODO
 
 Presentation
 
-- Our api strategy: building bridges, not islands
-- The git repo, what it is, how to check out
 - Header title for each puzzle piece
-- Add hackathon logo to front page
+- Add tip about doc for each example
+
 
 
 Device features to present:
