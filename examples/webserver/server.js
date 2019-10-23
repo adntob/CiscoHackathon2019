@@ -6,10 +6,15 @@ const path = require('path');
 const xapi = require('./xapi');
 
 const codec = {
-  host: '10.47.112.232',
+  host: '',
   username: 'admin',
   password: '',
 };
+
+if (!codec.host) {
+  console.error('You need to define host, username and password first. Edit server.js');
+  process.exit(0);
+}
 
 xapi.connect(codec);
 

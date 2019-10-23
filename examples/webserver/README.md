@@ -6,6 +6,8 @@ Express is a minimal Node.js web server that's easy to set up.
 
 ## Run the example
 
+Edit server.js, set host, username and password for the video device
+
 ``` shell
 npm run webserver
 ```

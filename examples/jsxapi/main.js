@@ -1,10 +1,16 @@
 const xapi = require('./xapi');
 
 const codec = {
-  host: '10.47.112.232',
+  host: '',
   username: 'admin',
   password: '',
 };
+
+if (!codec.host) {
+  console.error('You need to define host, username and password first. Edit main.js');
+  process.exit(0);
+}
+
 const number = 'fireplace@ivr.vc';
 
 xapi.connect(codec);
