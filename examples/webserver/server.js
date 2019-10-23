@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const host = 'localhost';
 const port = 3000;
+const path = require('path');
 const xapi = require('./xapi');
 
 const codec = {
@@ -27,7 +28,7 @@ app.get('/isInCall', (req, res) => {
 });
 
 // serve html files, assets etc from this folder:
-app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.listen(port, host, () => {
   const url = `http://${host}:${port}`;
