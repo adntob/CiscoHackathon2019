@@ -319,7 +319,6 @@ Sending a message to a person from a bot is just a simple REST call. Whenever a 
 
 <img src="images/bots.png" style="margin-left: 25%; width: 50%;" />
 
-
 The developer.webex.com site provides interactive ways to test your bots easily and learn the API, making it very easy to get started.
 
 Links:
