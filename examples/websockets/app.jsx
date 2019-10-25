@@ -7,7 +7,7 @@ import Online from './Online';
 
 function connect(opts, onError, onConnected) {
   const { hostname, username, password } = opts;
-  jsxapi.connect(`wss://${hostname}`, { username, password })
+  jsxapi.connect(`ws://${hostname}`, { username, password, protocol: 'ws:' })
     .on('error', onError)
     .on('ready', onConnected);
 }

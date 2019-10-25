@@ -25,7 +25,7 @@ export default function Connect(props) {
       htmlId="connect-modal"
       onHide={() => {}}
     >
-      <ModalHeader headerLabel="Connect to system" showCloseButton={false} />
+      <ModalHeader headerLabel="Start" showCloseButton={false} />
       <ModalBody>
         <div className="row">
           <div className="columns">
@@ -33,10 +33,12 @@ export default function Connect(props) {
               <Input
                 inputRef={setRef('hostname')}
                 placeholder="Hostname"
+                defaultValue = "172.17.4.73"
               />
               <Input
                 inputRef={setRef('username')}
                 placeholder="Username"
+                defaultValue="admin"
               />
               <Input
                 inputRef={setRef('password')}
@@ -49,7 +51,7 @@ export default function Connect(props) {
       </ModalBody>
       <ModalFooter>
         <Button
-          children="Connect"
+          children="Logg inn"
           color="blue"
           onClick={doConnect}
           type="submit"

@@ -6,7 +6,7 @@ const path = require('path');
 const xapi = require('./xapi');
 
 const codec = {
-  host: '',
+  host: '172.17.4.73',
   username: 'admin',
   password: '',
 };
