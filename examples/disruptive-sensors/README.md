@@ -8,7 +8,7 @@ Hackathon project: https://studio.disruptive-technologies.com/projects/blrpjplbf
 
 How to use:
 
-* npm install, it not done already
+* npm install, if not done already
 * Setup ngrok on your laptop, so the Disruptive cloud service can call your laptop even if its on a local network
 * npm run disruptive
 
