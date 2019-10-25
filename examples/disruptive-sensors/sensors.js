@@ -45,6 +45,23 @@ app.post('/',  (req, res) => {
             console.log(`Hackathon 5 Proximity State:`+req.body.event.data.objectPresent.state); 
         }
     }
+    if (req.body.event.eventType === `touch`) {
+
+        var device_id_list = ['bhqgs5mt96bg00813kgg', 'bgrhkh8lq8r000elc5m0', 'bful571o5b7g0093ctg0', 'bfulg0ho5b7g0093d8ag']
+
+        var device_id = req.body.event.targetName.split("/")[3]
+        var device = device_id_list.findIndex(function(element){return (element === device_id)})
+
+        const data = {
+            'button_number': device
+        };
+
+        expressWs.getWss().clients.forEach(c => c.send(JSON.stringify(data)));
+
+        console.log('Hackathon 5 Touch received, '+(device)+'!');
+    }
+
+    
     res.sendStatus(200);
 });
 

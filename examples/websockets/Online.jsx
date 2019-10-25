@@ -12,6 +12,7 @@ const QUESTIONS = [
 ];
 
 
+const registered_groups = []
 
 
 
@@ -38,6 +39,8 @@ export default function Online(props) {
        }
       ]
   );
+
+var lastPressedButton =
 
   function createWebsocket() {
     const socket = new WebSocket("ws://localhost:5050/ws");
