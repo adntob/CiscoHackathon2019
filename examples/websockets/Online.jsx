@@ -11,20 +11,7 @@ const QUESTIONS = [
   }
 ];
 
-const GROUPS = [
-{
-  'isActive':false,
-  'id':""
-}, 
-{
-  'isActive':true,
-  'id':""
-},
- { 
-  'isActive':false,
-  'id':""
- }
-]
+
 
 
 
@@ -35,6 +22,22 @@ export default function Online(props) {
   const [ws, setWs] = useState();
   const [count, setCount] = useState(0);
   const [temp, setTemp] = useState();
+  const [ groups, setGroups ] = useState(
+     [
+      {
+        'isActive':false,
+        'id':""
+      }, 
+      {
+        'isActive':false,
+        'id':""
+      },
+       { 
+        'isActive':false,
+        'id':""
+       }
+      ]
+  );
 
   function createWebsocket() {
     const socket = new WebSocket("ws://localhost:5050/ws");
@@ -77,39 +80,35 @@ export default function Online(props) {
 
       <div>Count: {count}</div>
       <div>
-        {GROUPS.map( (group, key)=>{
-          if (!group.isActive){
-            
-            return <div key = {key}>
-              <p>Group number: {key} 
-
-                <img src = {OFFbulb} width={20} onClick = {turnOff} />
-              </p>
-            </div>
-          }
-          else{
-            return <div key = {key}>
-              <p>Group number: {key}
-              <img src = {ONbulb} width={20}/>
-              </p>
-              
-              </div>
-          }
-          
-        } )}
+        {groups.map( (group, key) => (
+          <div key = {`${key}-${group.isActive}`}>
+          <p>Group number: {key}
+          <img src = {group.isActive ? ONbulb : OFFbulb} width={20} onClick = { ()=>{ 
+            const updatedGroups = groups.slice();
+            updatedGroups[key].isActive = !groups[key].isActive;
+            console.log(updatedGroups);
+              setGroups(updatedGroups);
+            }
+            }/>
+          </p>
+          </div>
+        ))}
       </div>
       <div>Temp: {temp}</div>
-
+      {/*
       <pre className="event-list">
         {events.map((event) => {
           const { timestamp, payload } = event;
           return `${timestamp.toLocaleTimeString('nb-NO')}: ${JSON.stringify(payload)}`;
         }).join('\n')}
       </pre>
+      */}
       <Button color="red" onClick={onDisconnect}>Log off</Button>
     </div>
   );
+
 }
+
 
 const turnOff = (i)=>{
   console.log('swag lyf')
